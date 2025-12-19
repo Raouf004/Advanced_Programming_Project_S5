@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import init_db
 from app.routers import auth, users, posts, comments
+from fastapi import WebSocket
+from app.websockets.chat import chat_socket
+from app.websockets.signaling import signaling_socket
+
 
 # Create FastAPI app
 app = FastAPI(
@@ -44,3 +48,13 @@ def read_root():
 @app.get("/health")
 def health_check():
     return {"status": "healthy"}
+
+
+@app.websocket("/ws/chat/{room_id}")
+async def chat_ws(websocket: WebSocket, room_id: str):
+    await chat_socket(websocket, room_id)
+
+
+@app.websocket("/ws/signaling/{room_id}")
+async def signaling_ws(websocket: WebSocket, room_id: str):
+    await signaling_socket(websocket, room_id)
