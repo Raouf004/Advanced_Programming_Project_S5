@@ -1,3 +1,9 @@
+from datetime import timedelta
+
+SECRET_KEY = "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 

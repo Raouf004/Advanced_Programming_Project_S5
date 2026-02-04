@@ -1,6 +1,6 @@
 from fastapi import WebSocket, status
 from jose import JWTError, jwt
-from app.utils.auth import SECRET_KEY, ALGORITHM
+from app.config import SECRET_KEY, ALGORITHM
 
 
 async def get_current_user_ws(websocket: WebSocket) -> str | None:
